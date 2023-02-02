@@ -227,11 +227,7 @@ class MD3_V1(MDDriftDetector):
 #this is for batch, not sliding window. sliding window forgetting factor sus
 #here supposed to query an oracle callback function.
 
-    
-
-            
-    # very inefficient, right now, creates new svm. need change the svm, so need to use class svm and fit.
-    
+        
 
 class MD3_X(MDDriftDetector):
         
@@ -335,7 +331,7 @@ def encodeAndScale(trainData,testBatch,trainLabels,encoder,scalerType):
         trainData2 = scaler.fit_transform(trainData2[trainData2.columns])
         testBatch2[columns[:]] = ord.transform(testBatch2[columns[:]])
         testBatch2 = scaler.transform(testBatch2[testBatch2.columns])
-        print(trainData2,flush=True)
+        #print(trainData2,flush=True)
         return trainData2,testBatch2,labels
 
     elif encoder=="ohe":
@@ -349,7 +345,7 @@ def encodeAndScale(trainData,testBatch,trainLabels,encoder,scalerType):
         encoded2= ohe.transform(testBatch2[columns[:]]).toarray()
         trainNum2 = scaler.transform(trainNum2[trainNum2.columns])
         testBatch2 = np.column_stack((trainNum2, encoded2))
-        print(testBatch2,flush=True)
+        #print(testBatch2,flush=True)
         return trainData2,testBatch2,labels
 
     elif encoder == "targ":
@@ -358,7 +354,7 @@ def encodeAndScale(trainData,testBatch,trainLabels,encoder,scalerType):
         trainData2 = scaler.fit_transform(trainData2[trainData2.columns])
         testBatch2[columns[:]] = targ.transform(testBatch2[columns[:]])
         testBatch2 = scaler.transform(testBatch2[testBatch2.columns])
-        print(trainData2,flush=True)
+        #print(trainData2,flush=True)
         return trainData2,testBatch2,labels
     else:
         print("Not a valid encoder")
